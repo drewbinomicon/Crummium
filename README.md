@@ -31,7 +31,7 @@ mkdir -p "$HOME/cef_browser"
 cd "$HOME/cef_browser"
 
 # Download and extract CEF
-curl -L -o cef.tar.bz2 "https://cef-builds.spotifycdn.com/cef_binary_130.1.16%2Bg775798e%2Bchromium-130.0.6723.117_linuxarm64.tar.bz2"
+curl -L -o cef.tar.bz2 "https://cef-builds.spotifycdn.com/cef_binary_156.0.15%2Bgcf671c0%2Bchromium-156.0.8078.80_macosarm64_minimal.tar.bz2"
 tar -xjf cef.tar.bz2
 mv cef_binary_*_linuxarm64 cef
 
@@ -97,9 +97,9 @@ add_custom_command(TARGET crummium POST_BUILD
         "${CEF_ROOT}/Resources"
         "$<TARGET_FILE_DIR:crummium>"
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${CEF_ROOT}/Release/v8_context_snapshot.bin"
-        "$<TARGET_FILE_DIR:crummium>/v8_context_snapshot.bin"
-    COMMENT "Linking CEF runtime assets..."
+        "${CEF_ROOT}/Release/*.bin"
+        "$<TARGET_FILE_DIR:crummium>" || true
+    COMMENT "Linking CEF 150 runtime assets..."
 )
 EOF
 
